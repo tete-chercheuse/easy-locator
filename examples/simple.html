@@ -1,41 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<title>Easy locator</title>
-	 <link rel="stylesheet" type="text/css" href="easyLocator.css">  
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-   <script src="easyLocator.js"></script>
-   <script src="markerclusterer.min.js"></script>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Easy locator</title>
+    <link rel="stylesheet" type="text/css" href="../src/easyLocator.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="../src/easyLocator.js"></script>
 </head>
 
 <body>
-   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>   
-   <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-5067790193708510"
-        data-ad-slot="6013012438"
-        data-ad-format="auto"></ins>
-   <script>
-   (adsbygoogle = window.adsbygoogle || []).push({});
-   </script>
-
-	<div id="locatorList" style="height:400px"></div>
-	<script>      
-      $( document ).ready(function() {
-         var easyLocator = $('#locatorList').easyLocator({
-            spreadsheetId: '1GsuoK3XyWJoiie1eq0qrd-2DxRVSQ0Ut7DkGI23Gq0s',
-            useMarkerCluster: true,
+<div id="locatorList" style="height:400px"></div>
+<script>
+    $(document).ready(function() {
+        var easyLocator = $('#locatorList').easyLocator({
+            spreadsheetId:          '1GsuoK3XyWJoiie1eq0qrd-2DxRVSQ0Ut7DkGI23Gq0s',
+            useMarkerCluster:       true,
             markerClustererOptions: {
-               imagePath: 'images/m'
+                imagePath: 'images/m'
             }
-         });
+        });
 
-         easyLocator.onEvents.progress(function(evt){
+        easyLocator.onEvents.progress(function(evt) {
             console.log(evt);
-         });
-      });
-   </script>
+        });
+    });
+</script>
 </body>
 
 </html>

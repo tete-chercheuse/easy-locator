@@ -7,20 +7,7 @@ Dependencies :  ,
 
 1. [markerclusterer](https://github.com/googlemaps/js-marker-clusterer)
 2. [Jquery](https://jquery.com/)
-3. [underscorejs](http://underscorejs.org/) (Only if you want use templates)
-
-Note: (The file markerclusterer.min.js in this repo, is a version modified, you can use it if you want)
-
-Examples:
-
- 1. [Basic example](http://saulburgos.com/apps/easylocator/simple.html)
- 2. [Array of object](http://saulburgos.com/apps/easylocator/array.html)
- 3. [Google Maps options](http://saulburgos.com/apps/easylocator/customMapOptions.html)
- 4. [MarkerCluster custom icons](http://saulburgos.com/apps/easylocator/markerClusterCustom.html)
- 5. [Template](http://saulburgos.com/apps/easylocator/template.html)
- 6. [Template 2](http://saulburgos.com/apps/easylocator/template2.html)
- 7. [Template 3](http://saulburgos.com/apps/easylocator/template3.html)
- 8. [Rebuild](http://saulburgos.com/apps/easylocator/rebuild.html)
+3. [lodash](https://lodash.com/) (Only if you want use templates)
 
 Add easyLocator in your web
 
@@ -49,7 +36,7 @@ How to use it.
           apiKey: 'YOUR GOOGLE MAP API KEY'
    	})
 	```
-	*"youcontainer" must have height"*
+	*"yourContainer" must have height"*
 
 5. Done.
 
@@ -190,7 +177,7 @@ You can listen all events in this way:
 How to use templates:
 -----------------------
 
-1. Add [http://underscorejs.org/](http://underscorejs.org/) dependency
+1. Add [lodash](https://lodash.com/) dependency
 2. Set your template in the property "contentTemplate" with the correct format. When you set this, easyLocator will not use the infowindow anymore, instead will give you an empty container element with the class "locatorMap_template".
 3. All the content of you template will be inserted inside of "locatorMap_template" element. Is your job add all the styles and media queries needed.
 4. You need always add an element with the class "locatorMap_template_close", this will be used by easyLocator to closed the template.
@@ -199,25 +186,3 @@ How to use templates:
 
 
 If you have problems, please see the examples
-
-
-
-Additional notes:
------------------------
-
-If you map will change of size dynamically you should this according to [Google](https://developers.google.com/maps/documentation/javascript/reference):
-
-	Developers should trigger this event on the map when the div changes size: google.maps.event.trigger(map, 'resize') .
-
-**easyLocator is 100% free to use. If you're using easyLocator on a commercial project and feeling generous, consider a donation. Thanks :) !**
-
-[![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QBMMNFS76EMYU)
----------
-
-
-Additional Tool : Create custom Google streetview wihtout programming skill:
------------------------
-
-You only need upload your own 360 photos and done. Check this video : https://www.youtube.com/watch?v=WsPW1BTDc7c 
-
-[http://www.paneek.net/](http://www.paneek.net/)

@@ -1,0 +1,26 @@
+{
+  "name": "easyLocator",
+  "version": "1.0.0",
+  "main": [
+    "src/easyLocator.js",
+    "src/easyLocator.css"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.10.0",
+    "js-marker-clusterer": "*",
+    "lodash": "^4.17.4"
+  },
+  "homepage": "https://github.com/tete-chercheuse/easyLocator",
+  "authors": [
+    "Steliann <steliann@tete-chercheuse.fr>"
+  ],
+  "description": "Jquery plugin that load locations on google maps, using a google spreadsheet.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
