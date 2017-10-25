@@ -21,20 +21,18 @@
 		                      '<div id="locator-map" class="locator-map-map"></div>' +
 		                      '<div class="locator-map-template"></div>',
 		options:              {
-			mapContainer:              undefined,
-			map:                       undefined,
-			mapOptions:                undefined,
-			isAPIloaded:               false,
-			myLocations:               [],
-			openInfowindowAfterClick:  false,
-			itemListActiveCustomClass: '',
-			infoWindowCustomClass:     '',
-			contentTemplate:           '',
-			useMarkerCluster:          false,
-			mapType:                   undefined, //remove this
-			centerMapOnLocation:       true,
-			extraFields:               [],
-			markerClustererOptions:    {
+			mapContainer:             undefined,
+			map:                      undefined,
+			mapOptions:               undefined,
+			isAPIloaded:              false,
+			myLocations:              [],
+			centerMapOnLocation:      true,
+			infoWindowFields:         [],
+			infoWindowCustomClass:    'locator-map-infowindow',
+			openInfowindowAfterClick: false,
+			contentTemplate:          '',
+			useMarkerCluster:         false,
+			markerClustererOptions:   {
 				maxZoom: 12
 			}
 		},
@@ -130,16 +128,6 @@
 				'&callback=window.easyLocatorMethods.successGetJsonData';
 			script.async = true;
 			document.body.appendChild(script);
-
-		},
-		addExtraFields:       function(entry, newLocation) {
-
-			/*this.options.extraFields.forEach(function(element,index) {
-
-               if(entry.hasOwnProperty('gsx$' + element)) {
-                  newLocation[element] = entry['gsx$' + element].$t;
-               }
-            });*/
 		},
 		createLocation:       function(info) {
 
@@ -159,15 +147,9 @@
 			}
 
 			var newLocation = {
-				index:            info.index,
-				title:            info.title,
-				description:      info.description,
-				image:            info.image,
-				link:             info.link,
-				iconMarker:       info.iconMarker,
-				iconMarkerActive: info.iconMarkerActive,
-				marker:           marker,
-				active:           false
+				index:  info.index,
+				marker: marker,
+				active: false
 			};
 
 			if(this.options.useMarkerCluster) {
@@ -184,19 +166,13 @@
 				var entry = json.feed.entry[i];
 
 				var newLocation = this.createLocation({
-					index:            i,
-					title:            entry.gsx$title.$t,
-					description:      entry.gsx$description.$t,
-					image:            entry.gsx$image.$t,
-					link:             entry.gsx$link.$t,
-					iconMarker:       entry.gsx$iconmarker.$t,
-					iconMarkerActive: entry.gsx$iconmarkeractive.$t,
-					lat:              entry.gsx$lat.$t,
-					lng:              entry.gsx$lng.$t
+					index: i,
+					lat:   entry.gsx$lat.$t,
+					lng:   entry.gsx$lng.$t,
 				});
 
-				if(this.options.extraFields.length > 0) {
-					this.options.extraFields.forEach(function(element, index) {
+				if(this.options.infoWindowFields.length > 0) {
+					this.options.infoWindowFields.forEach(function(element, index) {
 						if(entry.hasOwnProperty('gsx$' + element)) {
 							newLocation.location[element] = entry['gsx$' + element].$t;
 						}
@@ -242,14 +218,14 @@
 		},
 		centerMapOnLocations: function() {
 			var bounds = new google.maps.LatLngBounds();
+
 			for(var i = 0; i < this.locations.length; i++) {
 				bounds.extend(this.locations[i].marker.getPosition());
 			}
-			;
+
 			this.options.map.fitBounds(bounds);
 		},
 		attachEventLocations: function() {
-
 			function createEvent(location) {
 				google.maps.event.addListener(location.marker, 'click', function() {
 
@@ -293,21 +269,19 @@
 			});
 		},
 		openInfoWindow:       function(location) {
-			var locationLink = '';
-			var locationImage = '';
 			this.locationActive = location;
 
-			if(location.link !== '') {
-				locationLink = '<p><a href="' + location.link + '" target="_blank">View</a></p>';
+			var innerHtml = '';
+
+			if(this.options.infoWindowFields.length > 0) {
+				this.options.infoWindowFields.forEach(function(element, index) {
+					if(location.hasOwnProperty(element)) {
+						innerHtml += '<div class="'+ element +'">' + location[element] + '</div>';
+					}
+				});
 			}
 
-			if(location.image !== '') {
-				locationImage = '<img src="' + location.image + '"/>';
-			}
-
-			var contentHTML = '<div id="locator-map-infowindow" class="' + self.easyLocatorMethods.options.infoWindowCustomClass + ' ">' + locationImage +
-				'<p class="title"><b>' + location.title + '</b></p>' +
-				'<p>' + location.description + '</p>' + locationLink + '</div>';
+			var contentHTML = '<div id="locator-map-infowindow" class="' + self.easyLocatorMethods.options.infoWindowCustomClass + '">' + innerHtml + '</div>';
 			this.options.infoWindow.setContent(contentHTML);
 			this.options.infoWindow.open(this.options.map, location.marker);
 		},
@@ -361,10 +335,6 @@
 
 				$.extend(newItem, entry);
 				newItem.marker = marker;
-
-				if(this.options.extraFields.length > 0) {
-					this.addExtraFields(entry, newItem);
-				}
 
 				if(this.options.useMarkerCluster) {
 					this.options.markerClusterer.addMarker(marker);

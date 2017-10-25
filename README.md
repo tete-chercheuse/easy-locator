@@ -66,17 +66,9 @@ SpreadSheet columns:
 
 **description:**  Description,it will only appear inside the infowindow.
 
-**lat:**  Coordinate use by google maps (latitude).
+**lat *(mandatory)*:**  Coordinate use by google maps (latitude).
 
-**lng:**  Coordinate use by google maps (longitude).
-
-**image:**  Image of your location.
-
-**link:**  If you want add a link, it will appear after the description
-
-**iconmarker:**  If you want to customize the icon marker, you can use a url. Size recommended 30x30 pixels (png,jpeg, jpg)
-
-**iconmarkeractive:** This icon will replace the "iconmarker" when the item is clicked
+**lng *(mandatory)*:**  Coordinate use by google maps (longitude).
 
 *The most important part  when you add a location  in your spreadsheet, are the coordinates (lat, lng) together describe the exact location of a place in Google map.*
 
@@ -116,23 +108,19 @@ var data = [{
 ```
 **showListOnDesktop (boolean):** If you want hide the left list items on desktop version, The map will get width 100% automatically
 
-**extraFields (array):** by default easyLocator will only set the properties that are needed by the plugin, the rest of columns will be ignore. But if you have more columns in the spreadsheet and you want them in the array of locations you can set the names of these columns in this property and each element of the array will have these properties witj the corresponding values.
+**infoWindowFields (array):** by default easyLocator will only set the properties that are needed by the plugin, the rest of columns will be ignore. But if you have more columns in the spreadsheet and you want them in the array of locations you can set the names of these columns in this property and each element of the array will have these properties with the corresponding values.
 
 Example: 
 ```javascript
 $('#locatorList').easyLocator({
    spreadsheetId: '1GsuoK3XyWJoiie1eq0qrd-2DxRVSQ0Ut7DkGI23Gq0s',   
-   extraFields: ['address','timeopen','timeclosed']   
+   infoWindowFields: ['address','timeopen','timeclosed']   
 }); 
 ```
 
-**showListOnMobile (boolean):** If you want hide the left list items on mobile version
- 
-**itemListActiveCustomClass (string):** This class will be added in the parent item after a click. You can use it to customize the element.
-         
 **infoWindowCustomClass (string):** This class will be added in the infoWindow container. You can use it to customize the element.
 
-**contentTemplate (string):** template underscorejs with the correct format according to [http://underscorejs.org/](http://underscorejs.org/)
+**contentTemplate (string):** template underscorejs with the correct format according to [lodash](https://lodash.com/)
 
 **mapOptions (Object):** Object with options of google maps.  For more info about what options use, please visit: [Google Maps](https://developers.google.com/maps/documentation/javascript/reference)
 
