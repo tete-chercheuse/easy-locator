@@ -13,7 +13,7 @@ var projectDir = path.resolve(__dirname);
 gulp.task('browsersync', function() {
 
 	browserSync.init(projectDir + '/**/*', {
-		proxy: 'http://easylocator.dev/',
+		proxy: 'http://easylocator.test/',
 		ghostMode: false
 	});
 });

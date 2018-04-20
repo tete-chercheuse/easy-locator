@@ -1,17 +1,17 @@
-# easyLocator V2.0
+# Easy Locator
 
 
-EasyLocator is a jquery plugin to load locations with Google Maps in any website using a google spreadsheet or an array of objects.
+Easy Locator is a jquery plugin to load locations with Google Maps in any website using a google spreadsheet or an array of objects.
 
-Dependencies :  , 
+Dependencies : 
 
 1. [markerclusterer](https://github.com/googlemaps/js-marker-clusterer)
 2. [Jquery](https://jquery.com/)
 3. [lodash](https://lodash.com/) (Only if you want use templates)
 
-Add easyLocator in your web
+Add easy-locator in your web
 
-    <script src="easyLocator.js"></script>
+    <script src="easy-locator.js"></script>
 
 How to use it.
 --------------

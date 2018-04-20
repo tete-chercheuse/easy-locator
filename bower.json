@@ -2,15 +2,15 @@
   "name": "easy-locator",
   "version": "1.0.0",
   "main": [
-    "src/easyLocator.js",
-    "src/easyLocator.css"
+    "src/easy-locator.js",
+    "src/easy-locator.css"
   ],
   "dependencies": {
     "jquery": ">= 1.10.0",
     "js-marker-clusterer": "*",
     "lodash": "^4.17.4"
   },
-  "homepage": "https://github.com/tete-chercheuse/easyLocator",
+  "homepage": "https://github.com/tete-chercheuse/easy-locator",
   "authors": [
     "Steliann <steliann@tete-chercheuse.fr>"
   ],
