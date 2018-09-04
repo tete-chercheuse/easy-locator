@@ -26,7 +26,10 @@
             mapOptions: undefined,
             isAPIloaded: false,
             myLocations: [],
-            defaultMarkerIcon: '',
+            markerIcon: {
+	            url: '',
+	            size: new google.maps.Size(32, 32)
+            },
             centerMapOnLocation: true,
             infoWindowFields: [],
             infoWindowCustomClass: 'locator-map-infowindow',
@@ -135,10 +138,10 @@
                 title: info.title
             });
 
-            if ((info.markerIcon && info.markerIcon !== '') || this.options.defaultMarkerIcon !== '') {
+            if ((info.markerIcon && info.markerIcon !== '') || this.options.markerIcon.url !== '') {
                 marker.setIcon({
-                    url: (info.markerIcon && info.markerIcon !== '') ? info.markerIcon : this.options.defaultMarkerIcon,
-                    scaledSize: new google.maps.Size(32, 32)
+                    url: (info.markerIcon && info.markerIcon !== '') ? info.markerIcon : this.options.markerIcon.url,
+                    scaledSize: this.options.markerIcon.size
                 });
             }
 
