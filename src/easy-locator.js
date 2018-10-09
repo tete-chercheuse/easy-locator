@@ -278,7 +278,15 @@
 			if(this.options.infoWindowFields.length > 0) {
 				this.options.infoWindowFields.forEach(function(element, index) {
 					if(location.hasOwnProperty(element)) {
-						innerHtml += '<div class="' + element + '">' + location[element] + '</div>';
+						if(_.includes(element, 'image')) {
+							innerHtml += '<div class="' + element + '"><img src="' + location[element] + '"></div>';
+						}
+						else if(_.includes(element, 'url')) {
+							innerHtml += '<div class="' + element + '"><a href="' + location[element] + '">' + location[element] + '</a></div>';
+						}
+						else {
+							innerHtml += '<div class="' + element + '">' + location[element] + '</div>';
+						}
 					}
 				});
 			}
