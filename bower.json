@@ -1,6 +1,6 @@
 {
   "name": "easy-locator",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "main": [
     "src/easy-locator.js",
     "src/easy-locator.css"

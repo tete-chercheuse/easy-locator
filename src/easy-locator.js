@@ -1,11 +1,6 @@
 /*!
- * jQuery easyLocator v2.0
- * https://github.com/SaulBurgos/easyLocator
- *
- * Copyright Saul Burgos
- * http://saulburgos.com/
- *
- * Date: 1/11/2016
+ * jQuery easyLocator 1.0.4
+ * https://github.com/tete-chercheuse/easy-locator
  */
 
 (function($) {
@@ -276,7 +271,9 @@
 			var innerHtml = '';
 
 			if(this.options.infoWindowFields.length > 0) {
+
 				this.options.infoWindowFields.forEach(function(element, index) {
+
 					if(location.hasOwnProperty(element)) {
 						if(_.includes(element, 'image')) {
 							innerHtml += '<div class="' + element + '"><img src="' + location[element] + '"></div>';
@@ -284,7 +281,7 @@
 						else if(_.includes(element, 'url')) {
 							innerHtml += '<div class="' + element + '"><a href="' + location[element] + '">' + location[element] + '</a></div>';
 						}
-						else {
+						else if(!_.isEmpty(location[element])){
 							innerHtml += '<div class="' + element + '">' + location[element] + '</div>';
 						}
 					}
