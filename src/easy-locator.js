@@ -1,5 +1,5 @@
 /*!
- * jQuery easyLocator 1.0.4
+ * jQuery easyLocator 1.0.5
  * https://github.com/tete-chercheuse/easy-locator
  */
 
@@ -279,7 +279,7 @@
 							innerHtml += '<div class="' + element + '"><img src="' + location[element] + '"></div>';
 						}
 						else if(_.includes(element, 'url')) {
-							innerHtml += '<div class="' + element + '"><a href="' + location[element] + '">' + location[element] + '</a></div>';
+							innerHtml += '<div class="' + element + '"><a href="' + location[element] + '" target="_blank">' + location[element] + '</a></div>';
 						}
 						else if(!_.isEmpty(location[element])){
 							innerHtml += '<div class="' + element + '">' + location[element] + '</div>';
