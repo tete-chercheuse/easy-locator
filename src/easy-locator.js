@@ -282,7 +282,7 @@
 							innerHtml += '<div class="' + element + '"><a href="' + location[element] + '" target="_blank">' + location[element] + '</a></div>';
 						}
 						else if(_.includes(element, 'email')) {
-							innerHtml += '<div class="' + element + '"><a href="mailto:' + location[element] + '" target="_blank">' + location[element] + '</a></div>';
+							innerHtml += '<div class="' + element + '"><a href="mailto:' + location[element] + '">' + location[element] + '</a></div>';
 						}
 						else if(!_.isEmpty(location[element])){
 							innerHtml += '<div class="' + element + '">' + location[element] + '</div>';
