@@ -130,11 +130,11 @@
 		},
 		createLocation:       function(info) {
 
-			info.lat = info.lat.replace(",", ".");
-			vinfo.lng = info.lng.replace(",", ".");
+			var marker_lat = info.lat.replace(",", ".");
+			var marker_lng = info.lng.replace(",", ".");
 
 			var marker = new google.maps.Marker({
-				position: new google.maps.LatLng(info.lat, info.lng),
+				position: new google.maps.LatLng(marker_lat, marker_lng),
 				map:      this.options.map,
 				title:    info.title
 			});
@@ -165,10 +165,13 @@
 			for(var i = 0; i < json.feed.entry.length; i++) {
 				var entry = json.feed.entry[i];
 
+				var entry_lat = entry.gsx$lat.$t.replace(",",".");
+				var entry_lng = entry.gsx$lng.$t.replace(",",".");
+
 				var newLocation = this.createLocation({
 					index: i,
-					lat:   entry.gsx$lat.$t,
-					lng:   entry.gsx$lng.$t,
+					lat:   entry_lat,
+					lng:   entry_lng,
 				});
 
 				if(this.options.infoWindowFields.length > 0) {
