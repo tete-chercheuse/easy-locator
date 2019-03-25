@@ -130,6 +130,9 @@
 		},
 		createLocation:       function(info) {
 
+			info.lat = info.lat.replace(",", ".");
+			vinfo.lng = info.lng.replace(",", ".");
+
 			var marker = new google.maps.Marker({
 				position: new google.maps.LatLng(info.lat, info.lng),
 				map:      this.options.map,
