@@ -1,5 +1,5 @@
 /*!
- * jQuery easyLocator 1.0.9
+ * jeasy-locator 1.0.10
  * https://github.com/tete-chercheuse/easy-locator
  */
 
@@ -16,29 +16,33 @@
 			                      '<div id="locator-map" class="locator-map-map"></div>' +
 			                      '<div class="locator-map-template"></div>',
 		options:              {
-			mapContainer:             undefined,
-			map:                      undefined,
-			mapOptions:               undefined,
+			apiKey:                   null,
+			spreadsheetId:            null,
+			spreadsheetSheet:         1,
+			mapContainer:             null,
+			map:                      null,
+			mapOptions:               null,
 			isAPIloaded:              false,
 			myLocations:              [],
 			markerIcon:               {
-				url:  '',
+				url:  null,
 				size: { w: 32, h: 32 }
 			},
 			centerMapOnLocation:      true,
 			infoWindowFields:         [],
 			infoWindowCustomClass:    'locator-map-infowindow',
 			openInfowindowAfterClick: false,
-			contentTemplate:          '',
+			contentTemplate:          null,
 			useMarkerCluster:         false,
 			markerClustererOptions:   {
 				maxZoom: 12
 			}
 		},
 		loadScripts:          function(container) {
+
 			this.showHideLoader('show');
-			var scriptMapUrl = 'https://maps.googleapis.com/maps/api/js?libraries=places' +
-				'&callback=window.easyLocatorMethods.loadMap';
+
+			var scriptMapUrl = 'https://maps.googleapis.com/maps/api/js?libraries=places&callback=window.easyLocatorMethods.loadMap';
 
 			if(typeof google === 'object' && typeof google.maps === 'object') {
 				self.easyLocatorMethods.options.isAPIloaded = true;
@@ -46,10 +50,10 @@
 			}
 			else {
 
-				if(typeof this.options.apiKey !== 'undefined') {
-					scriptMapUrl = 'https://maps.googleapis.com/maps/api/js?libraries=places' +
-						'&key=' + this.options.apiKey + '&callback=window.easyLocatorMethods.loadMap';
+				if(this.options.apiKey !== null) {
+					scriptMapUrl = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + this.options.apiKey + '&callback=window.easyLocatorMethods.loadMap';
 				}
+
 				var script = document.createElement('script');
 				script.type = 'text/javascript';
 				script.src = scriptMapUrl
@@ -67,7 +71,7 @@
 			this.options.isAPIloaded = true;
 			var mapOptions;
 
-			if(typeof this.options.mapOptions === 'undefined') {
+			if(this.options.mapOptions === null) {
 				mapOptions = {
 					zoom:      8,
 					center:    new google.maps.LatLng(-34.397, 150.644),
@@ -89,7 +93,7 @@
 					data:      {}
 				});
 
-				if(typeof self.easyLocatorMethods.options.spreadsheetId !== 'undefined') {
+				if(self.easyLocatorMethods.options.spreadsheetId !== null) {
 					self.easyLocatorMethods.getJsonData();
 					return;
 				}
@@ -100,10 +104,12 @@
 
 			});
 
-			if(this.options.contentTemplate === '') {
-				this.options.infoWindow = new google.maps.InfoWindow({ maxWidth: 400 });
+			if(this.options.contentTemplate === null) {
+
+				this.options.infoWindow = new google.maps.InfoWindow({ maxWidth: 480 });
 
 				google.maps.event.addListener(this.options.infoWindow, 'closeclick', function() {
+
 					self.easyLocatorMethods.triggerEvent({
 						eventName: 'infoWindowClosed',
 						data:      {}
@@ -123,8 +129,7 @@
 		getJsonData:          function() {
 			var script = document.createElement('script');
 			script.type = 'text/javascript';
-			script.src = 'https://spreadsheets.google.com/feeds/list/' + this.options.spreadsheetId + '/od6/public/values?hl=en_US&alt=json' +
-				'&callback=window.easyLocatorMethods.successGetJsonData';
+			script.src = 'https://spreadsheets.google.com/feeds/list/' + this.options.spreadsheetId + '/' + this.options.spreadsheetSheet + '/public/values?hl=en_US&alt=json&callback=window.easyLocatorMethods.successGetJsonData';
 			script.async = true;
 			document.body.appendChild(script);
 		},
@@ -139,7 +144,8 @@
 				title:    info.title
 			});
 
-			if((info.markerIcon && info.markerIcon !== '') || this.options.markerIcon.url !== '') {
+			if((info.markerIcon && info.markerIcon !== '') || this.options.markerIcon.url !== null) {
+
 				marker.setIcon({
 					url:        (info.markerIcon && info.markerIcon !== '') ? info.markerIcon : this.options.markerIcon.url,
 					scaledSize: new google.maps.Size(this.options.markerIcon.size.w, this.options.markerIcon.size.h)
@@ -232,7 +238,7 @@
 			function createEvent(location) {
 				google.maps.event.addListener(location.marker, 'click', function() {
 
-					if(self.easyLocatorMethods.options.contentTemplate === '') {
+					if(self.easyLocatorMethods.options.contentTemplate === null) {
 						self.easyLocatorMethods.openInfoWindow(location);
 					}
 					else {
@@ -337,15 +343,6 @@
 					map:      this.options.map,
 					title:    entry.title
 				});
-
-				if(typeof entry.iconMarker !== 'undefined' && entry.iconMarker !== '') {
-					marker.setOptions({
-						icon: {
-							url:        entry.iconMarker,
-							scaledSize: new google.maps.Size(32, 32)
-						}
-					});
-				}
 
 				var newItem = {
 					index:  i,
