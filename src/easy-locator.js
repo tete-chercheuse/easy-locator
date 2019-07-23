@@ -1,5 +1,5 @@
 /*!
- * jQuery easyLocator 1.0.5
+ * jQuery easyLocator 1.0.9
  * https://github.com/tete-chercheuse/easy-locator
  */
 
@@ -165,8 +165,8 @@
 			for(var i = 0; i < json.feed.entry.length; i++) {
 				var entry = json.feed.entry[i];
 
-				var entry_lat = entry.gsx$lat.$t.replace(",",".");
-				var entry_lng = entry.gsx$lng.$t.replace(",",".");
+				var entry_lat = entry.gsx$lat.$t.replace(",", ".");
+				var entry_lng = entry.gsx$lng.$t.replace(",", ".");
 
 				var newLocation = this.createLocation({
 					index: i,
@@ -282,7 +282,7 @@
 
 					if(location.hasOwnProperty(element)) {
 						if(_.includes(element, 'image')) {
-							innerHtml += '<div class="' + element + '"><img src="' + location[element] + '"></div>';
+							innerHtml += '<div class="' + element + '"><img src="' + location[element] + '" alt="' + element + '"/></div>';
 						}
 						else if(_.includes(element, 'url')) {
 							innerHtml += '<div class="' + element + '"><a href="' + location[element] + '" target="_blank">' + location[element] + '</a></div>';
@@ -290,7 +290,10 @@
 						else if(_.includes(element, 'email')) {
 							innerHtml += '<div class="' + element + '"><a href="mailto:' + location[element] + '">' + location[element] + '</a></div>';
 						}
-						else if(!_.isEmpty(location[element])){
+						else if(_.includes(element, 'phone')) {
+							innerHtml += '<div class="' + element + '"><a href="tel:' + location[element] + '">' + location[element] + '</a></div>';
+						}
+						else if(!_.isEmpty(location[element])) {
 							innerHtml += '<div class="' + element + '">' + location[element] + '</div>';
 						}
 					}

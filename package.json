@@ -1,6 +1,6 @@
 {
   "name": "easy-locator",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "description": "Jquery plugin that load locations on google maps, using a google spreadsheet.",
   "main": "src/easy-locator.js",
   "directories": {
