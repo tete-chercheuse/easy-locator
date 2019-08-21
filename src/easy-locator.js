@@ -1,5 +1,5 @@
 /*!
- * jeasy-locator 1.0.10
+ * easy-locator 1.0.11
  * https://github.com/tete-chercheuse/easy-locator
  */
 
@@ -286,7 +286,8 @@
 
 				this.options.infoWindowFields.forEach(function(element, index) {
 
-					if(location.hasOwnProperty(element)) {
+					if(location.hasOwnProperty(element) && !_.isEmpty(location[element])) {
+
 						if(_.includes(element, 'image')) {
 							innerHtml += '<div class="' + element + '"><img src="' + location[element] + '" alt="' + element + '"/></div>';
 						}
@@ -299,7 +300,7 @@
 						else if(_.includes(element, 'phone')) {
 							innerHtml += '<div class="' + element + '"><a href="tel:' + location[element] + '">' + location[element] + '</a></div>';
 						}
-						else if(!_.isEmpty(location[element])) {
+						else {
 							innerHtml += '<div class="' + element + '">' + location[element] + '</div>';
 						}
 					}
